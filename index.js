@@ -8,7 +8,7 @@ const express = require("express")
 const app = express()
 const port = 3000
 
-app.get('/students',  async (req, res) => {
+app.get('/students', async (req, res) => {
 
   const { data, error } = await supabase
   .from('students')
@@ -17,8 +17,13 @@ app.get('/students',  async (req, res) => {
   res.json(data)
 })
 
-app.post('/students', (req, res) => {
-  res.send("Добавление студентов")
+app.post('/students/:id', async (req, res) => {
+
+  const { data, error } = await supabase
+  .from('students')
+  .insert({ id : 3, full_name: 'Иванов Иван Иванович', birthday: '2005-02-10', group: 'ИС23/9-2' })
+
+  res.json(data)
 })
 
 app.delete('/students/:id', async (req, res) => {
@@ -30,12 +35,15 @@ res.json('Студент с id =' + req.params.id + 'удален!')
 
 })
 
-app.put('/students', (req, res) => {
-  res.send("Изменение студентов")
+app.put('/students', async (req, res) => {
+  
+  const { data, error } = await supabase
+  .from('students')
+  .upsert({ id: 3, group: 'ГД 23/9-1' })
+  .select()
+
+  res.json(data)
 })
-
-
-
 
 
 
