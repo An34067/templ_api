@@ -39,13 +39,11 @@ app.put('/students', async (req, res) => {
   
   const { data, error } = await supabase
   .from('students')
-  .upsert({ id: 3, group: 'ГД 23/9-1' })
+  .upsert({ id: 3, full_name: 'Морозова Елена Алексеевна', birthday: '1996-12-04', group: 'ГД 21/11' })
   .select()
 
   res.json(data)
 })
-
-
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
