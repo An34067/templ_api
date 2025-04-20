@@ -31,7 +31,7 @@ app.delete('/students/:id', async (req, res) => {
   .from('students')
   .delete()
   .eq('id', req.params.id)
-res.json('Студент с id =' + req.params.id + 'удален!')
+res.json('Студент с id = ' + req.params.id + 'удален!')
 
 })
 
